@@ -1,0 +1,1756 @@
+/* ==========================================================================
+   SERENDIB · SRI LANKA — Editorial Static Travel Experience
+   Optimized for AWS S3 + CloudFront / AWS Amplify Static Hosting
+   ========================================================================== */
+
+:root {
+  /* Sunlit Ceylon Linen & Tropical Forest Palette */
+  --bg-canvas: #FAF6F0;
+  --bg-elevated: #FFFFFF;
+  --bg-stone: #F1EAE0;
+  --bg-stone-hover: #E7DDD0;
+  --bg-jungle: #0E221B;
+  --bg-jungle-card: #152E25;
+  --bg-jungle-elevated: #1C3B30;
+
+  /* Ink & Text Hierarchy */
+  --text-primary: #14201B;
+  --text-secondary: #46554E;
+  --text-muted: #707F77;
+  --text-on-dark: #F7F3EB;
+  --text-on-dark-muted: #B2C2BA;
+
+  /* Authentic Sri Lankan Accent Pigments */
+  --accent-terracotta: #C4552D;
+  --accent-terracotta-hover: #A84420;
+  --accent-gold: #D49B35;
+  --accent-gold-soft: rgba(212, 155, 53, 0.16);
+  --accent-emerald: #1B4D3E;
+  --accent-lagoon: #1A6B7A;
+
+  /* Hairline Borders & Subtle Shadows */
+  --border-subtle: rgba(20, 32, 27, 0.1);
+  --border-strong: rgba(20, 32, 27, 0.18);
+  --border-on-dark: rgba(247, 243, 235, 0.14);
+  --shadow-soft: 0 12px 32px -12px rgba(20, 32, 27, 0.09);
+  --shadow-hover: 0 22px 44px -14px rgba(20, 32, 27, 0.16);
+  --shadow-modal: 0 32px 64px -16px rgba(10, 20, 16, 0.45);
+
+  /* Typography */
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Layout Rhythm & Radii */
+  --container-max: 1280px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-pill: 9999px;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  line-height: 1.65;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-terracotta);
+  outline-offset: 3px;
+}
+
+.container {
+  width: min(var(--container-max), calc(100% - 2.5rem));
+  margin-inline: auto;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ==========================================================================
+   Sticky Navigation Header
+   ========================================================================== */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 1rem 0;
+  transition: background-color 0.3s var(--ease-out), border-color 0.3s var(--ease-out), padding 0.3s var(--ease-out), color 0.3s var(--ease-out);
+  color: var(--text-on-dark);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(180deg, rgba(10, 22, 18, 0.72) 0%, rgba(10, 22, 18, 0) 100%);
+}
+
+.site-header.is-scrolled {
+  background: rgba(250, 246, 240, 0.93);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0.75rem 0;
+  box-shadow: 0 4px 20px rgba(20, 32, 27, 0.05);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.brand-lotus {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
+
+.brand-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.35rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.brand-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.85rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 0.88rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  opacity: 0.88;
+  transition: opacity 0.2s ease, color 0.2s ease;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 1.5px;
+  background: var(--accent-terracotta);
+  transition: width 0.25s var(--ease-out);
+}
+
+.nav-links a:hover {
+  opacity: 1;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.live-clock-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  border: 1px solid currentColor;
+  opacity: 0.85;
+}
+
+.pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #35C982;
+  box-shadow: 0 0 0 3px rgba(53, 201, 130, 0.24);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.75rem 1.4rem;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 0.88rem;
+  letter-spacing: 0.01em;
+  transition: transform 0.22s var(--ease-out), background-color 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+  white-space: nowrap;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-primary {
+  background-color: var(--accent-terracotta);
+  color: #FFFFFF;
+  box-shadow: 0 8px 20px -6px rgba(196, 85, 45, 0.55);
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-terracotta-hover);
+  transform: translateY(-1px);
+}
+
+.btn-glass {
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+}
+
+.btn-glass:hover {
+  background: rgba(255, 255, 255, 0.24);
+}
+
+.btn-outline {
+  border: 1px solid var(--border-strong);
+  color: var(--text-primary);
+  background: var(--bg-elevated);
+}
+
+.btn-outline:hover {
+  border-color: var(--accent-terracotta);
+  color: var(--accent-terracotta);
+}
+
+.btn-sm {
+  padding: 0.52rem 1.05rem;
+  font-size: 0.82rem;
+}
+
+.itinerary-badge-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.24);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+}
+
+.mobile-menu-toggle {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  align-items: center;
+  justify-content: center;
+  border: 1px solid currentColor;
+}
+
+/* ==========================================================================
+   Full-Bleed Editorial Hero Section
+   ========================================================================== */
+.hero {
+  position: relative;
+  min-height: 94vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 8.5rem 0 0;
+  color: var(--text-on-dark);
+  overflow: hidden;
+  background-color: var(--bg-jungle);
+}
+
+.hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 42%;
+  transform: scale(1.02);
+  animation: heroSlowDrift 24s ease-in-out infinite alternate;
+}
+
+@keyframes heroSlowDrift {
+  from {
+    transform: scale(1.01);
+  }
+  to {
+    transform: scale(1.06);
+  }
+}
+
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(10, 24, 19, 0.58) 0%, rgba(10, 24, 19, 0.22) 38%, rgba(10, 24, 19, 0.86) 88%, rgba(14, 34, 27, 0.97) 100%),
+    radial-gradient(circle at 20% 65%, rgba(10, 24, 19, 0.55) 0%, transparent 60%);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding-bottom: 3.5rem;
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 2.5rem;
+  align-items: end;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #F3CA7A;
+  margin-bottom: 1.15rem;
+}
+
+.hero-eyebrow-line {
+  width: 32px;
+  height: 1px;
+  background-color: #F3CA7A;
+}
+
+.hero-headline {
+  font-family: var(--font-display);
+  font-size: clamp(2.85rem, 6vw, 5.35rem);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  margin-bottom: 1.35rem;
+  max-width: 15ch;
+}
+
+.hero-headline em {
+  font-style: italic;
+  font-weight: 500;
+  color: #F6D899;
+}
+
+.hero-lead {
+  font-size: clamp(1rem, 1.35vw, 1.16rem);
+  line-height: 1.7;
+  color: rgba(247, 243, 235, 0.9);
+  max-width: 58ch;
+  margin-bottom: 2rem;
+}
+
+.hero-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+.hero-dispatch-card {
+  background: rgba(14, 34, 27, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(247, 243, 235, 0.18);
+  border-radius: var(--radius-md);
+  padding: 1.4rem 1.5rem;
+  justify-self: end;
+  max-width: 360px;
+}
+
+.dispatch-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #F3CA7A;
+  margin-bottom: 0.5rem;
+}
+
+.dispatch-title {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 0.55rem;
+}
+
+.dispatch-desc {
+  font-size: 0.86rem;
+  color: var(--text-on-dark-muted);
+  margin-bottom: 0.95rem;
+}
+
+.dispatch-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #F6D899;
+}
+
+.dispatch-link:hover {
+  text-decoration: underline;
+}
+
+/* Telemetry Strip */
+.hero-telemetry {
+  position: relative;
+  z-index: 2;
+  border-top: 1px solid rgba(247, 243, 235, 0.14);
+  background: rgba(10, 25, 19, 0.78);
+  backdrop-filter: blur(10px);
+}
+
+.telemetry-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.telemetry-item {
+  padding: 1.35rem 1.5rem;
+  border-right: 1px solid rgba(247, 243, 235, 0.1);
+}
+
+.telemetry-item:first-child {
+  padding-left: 0;
+}
+
+.telemetry-item:last-child {
+  border-right: none;
+  padding-right: 0;
+}
+
+.telemetry-value {
+  font-family: var(--font-display);
+  font-size: 1.85rem;
+  font-weight: 600;
+  line-height: 1.1;
+  color: #FFFFFF;
+  margin-bottom: 0.2rem;
+}
+
+.telemetry-label {
+  font-size: 0.8rem;
+  color: var(--text-on-dark-muted);
+}
+
+/* ==========================================================================
+   Section Scaffolding & Editorial Headers
+   ========================================================================== */
+.section {
+  padding: clamp(4.5rem, 8vw, 7rem) 0;
+}
+
+.section-stone {
+  background-color: var(--bg-stone);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.section-dark {
+  background-color: var(--bg-jungle);
+  color: var(--text-on-dark);
+}
+
+.section-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.section-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--accent-terracotta);
+  margin-bottom: 0.65rem;
+  display: block;
+}
+
+.section-dark .section-eyebrow {
+  color: #F3CA7A;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.15rem, 4vw, 3.35rem);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  max-width: 18ch;
+}
+
+.section-title em {
+  font-style: italic;
+  font-weight: 500;
+}
+
+.section-subtitle {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  max-width: 52ch;
+}
+
+.section-dark .section-subtitle {
+  color: var(--text-on-dark-muted);
+}
+
+/* ==========================================================================
+   Section 1: Signature Destinations Grid & Filter Pills
+   ========================================================================== */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-bottom: 2.25rem;
+}
+
+.filter-pill {
+  padding: 0.55rem 1.15rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  transition: all 0.2s ease;
+}
+
+.filter-pill:hover {
+  border-color: var(--accent-emerald);
+  color: var(--text-primary);
+}
+
+.filter-pill.is-active {
+  background: var(--accent-emerald);
+  color: #FFFFFF;
+  border-color: var(--accent-emerald);
+}
+
+.destinations-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+}
+
+.dest-card {
+  background: var(--bg-elevated);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+}
+
+.dest-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+}
+
+.dest-card[hidden] {
+  display: none;
+}
+
+.dest-card-media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background-color: var(--bg-stone);
+}
+
+.dest-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-out);
+}
+
+.dest-card:hover .dest-card-media img {
+  transform: scale(1.05);
+}
+
+.dest-region-tag {
+  position: absolute;
+  top: 0.9rem;
+  left: 0.9rem;
+  padding: 0.32rem 0.75rem;
+  border-radius: var(--radius-pill);
+  background: rgba(14, 34, 27, 0.76);
+  backdrop-filter: blur(8px);
+  color: #FAF6F0;
+  font-family: var(--font-mono);
+  font-size: 0.69rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.dest-save-btn {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--text-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.14);
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.dest-save-btn:hover {
+  transform: scale(1.08);
+}
+
+.dest-save-btn.is-saved {
+  background: var(--accent-terracotta);
+  color: #FFFFFF;
+}
+
+.dest-card-body {
+  padding: 1.45rem 1.5rem 1.55rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.dest-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-bottom: 0.45rem;
+}
+
+.dest-card-title {
+  font-family: var(--font-display);
+  font-size: 1.65rem;
+  font-weight: 600;
+  line-height: 1.15;
+  margin-bottom: 0.55rem;
+}
+
+.dest-card-summary {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.25rem;
+  flex: 1;
+}
+
+.dest-card-footer {
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.dest-best-months {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+.dest-best-months strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.dest-inspect-btn {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--accent-terracotta);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.dest-inspect-btn:hover {
+  gap: 0.55rem;
+}
+
+/* ==========================================================================
+   Section 2: Interactive Route Explorer & Sri Lanka SVG Map
+   ========================================================================== */
+.routes-layout {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.route-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.75rem;
+}
+
+.route-tab {
+  text-align: left;
+  padding: 1rem 1.1rem;
+  border-radius: var(--radius-md);
+  background: var(--bg-jungle-card);
+  border: 1px solid var(--border-on-dark);
+  color: var(--text-on-dark);
+  transition: all 0.22s ease;
+}
+
+.route-tab:hover {
+  border-color: rgba(243, 202, 122, 0.5);
+}
+
+.route-tab.is-active {
+  background: var(--bg-jungle-elevated);
+  border-color: #F3CA7A;
+  box-shadow: 0 10px 28px -10px rgba(0, 0, 0, 0.45);
+}
+
+.route-tab-duration {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #F3CA7A;
+  margin-bottom: 0.25rem;
+}
+
+.route-tab-name {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.route-detail-panel {
+  background: var(--bg-jungle-card);
+  border: 1px solid var(--border-on-dark);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+}
+
+.route-summary-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.35rem;
+  border-bottom: 1px solid var(--border-on-dark);
+}
+
+.route-stat-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-on-dark-muted);
+}
+
+.route-stat-val {
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+
+.route-stops-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.route-stop-item {
+  display: grid;
+  grid-template-columns: 74px 1fr;
+  gap: 1rem;
+  padding: 0.95rem 1.05rem;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.route-stop-item:hover,
+.route-stop-item.is-highlighted {
+  border-color: rgba(243, 202, 122, 0.55);
+  background: rgba(243, 202, 122, 0.07);
+}
+
+.route-day-pill {
+  font-family: var(--font-mono);
+  font-size: 0.73rem;
+  color: #F3CA7A;
+  padding-top: 0.15rem;
+}
+
+.route-stop-title {
+  font-weight: 600;
+  font-size: 0.98rem;
+  margin-bottom: 0.2rem;
+  color: #FFFFFF;
+}
+
+.route-stop-desc {
+  font-size: 0.85rem;
+  color: var(--text-on-dark-muted);
+}
+
+/* Interactive Island Map Panel */
+.map-card {
+  background: var(--bg-jungle-card);
+  border: 1px solid var(--border-on-dark);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  position: sticky;
+  top: 5.5rem;
+}
+
+.map-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.map-card-title {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #F3CA7A;
+}
+
+.sri-lanka-svg-wrap {
+  width: 100%;
+  max-width: 390px;
+  margin: 0 auto;
+}
+
+.island-landmass {
+  fill: #1A3A2E;
+  stroke: #3F6D5B;
+  stroke-width: 2;
+}
+
+.island-highlands {
+  fill: #244D3E;
+  opacity: 0.75;
+}
+
+.route-path-line {
+  fill: none;
+  stroke: #F3CA7A;
+  stroke-width: 2.8;
+  stroke-dasharray: 6 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  animation: dashFlow 18s linear infinite;
+}
+
+@keyframes dashFlow {
+  to {
+    stroke-dashoffset: -120;
+  }
+}
+
+.map-node {
+  cursor: pointer;
+}
+
+.map-node circle.node-outer {
+  fill: rgba(243, 202, 122, 0.2);
+  transition: r 0.25s ease, fill 0.25s ease;
+}
+
+.map-node circle.node-core {
+  fill: #FAF6F0;
+  stroke: #0E221B;
+  stroke-width: 2;
+  transition: fill 0.25s ease, r 0.25s ease;
+}
+
+.map-node.is-in-route circle.node-core {
+  fill: #F3CA7A;
+}
+
+.map-node.is-selected circle.node-core,
+.map-node:hover circle.node-core {
+  fill: var(--accent-terracotta);
+}
+
+.map-node text {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  fill: #FAF6F0;
+  pointer-events: none;
+}
+
+.map-active-readout {
+  margin-top: 1rem;
+  padding: 0.95rem 1.1rem;
+  border-radius: var(--radius-md);
+  background: rgba(10, 22, 18, 0.55);
+  border: 1px solid var(--border-on-dark);
+}
+
+.map-readout-name {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #F6D899;
+}
+
+.map-readout-info {
+  font-size: 0.83rem;
+  color: var(--text-on-dark-muted);
+  margin-top: 0.2rem;
+}
+
+/* ==========================================================================
+   Section 3: Dual-Monsoon Seasonality Finder
+   ========================================================================== */
+.month-selector {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 0.45rem;
+  margin-bottom: 2rem;
+}
+
+.month-btn {
+  padding: 0.7rem 0.3rem;
+  border-radius: var(--radius-sm);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: all 0.18s ease;
+}
+
+.month-btn:hover {
+  border-color: var(--accent-terracotta);
+}
+
+.month-btn.is-active {
+  background: var(--accent-terracotta);
+  color: #FFFFFF;
+  border-color: var(--accent-terracotta);
+  box-shadow: 0 8px 18px -6px rgba(196, 85, 45, 0.55);
+}
+
+.season-dashboard {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 1.75rem;
+}
+
+.season-regions-card,
+.season-highlight-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.85rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.season-month-heading {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.15;
+  margin-bottom: 0.45rem;
+}
+
+.season-verdict {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.region-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 1.05rem;
+}
+
+.region-bar-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.region-bar-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.region-rating-badge {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+}
+
+.meter-track {
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-stone);
+  overflow: hidden;
+}
+
+.meter-fill {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: var(--accent-emerald);
+  transition: width 0.4s var(--ease-out), background-color 0.3s ease;
+}
+
+.season-highlight-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: linear-gradient(155deg, #FFFFFF 0%, #FAF3E6 100%);
+}
+
+.festival-box {
+  padding: 1.15rem;
+  border-radius: var(--radius-md);
+  background: var(--accent-gold-soft);
+  border: 1px solid rgba(212, 155, 53, 0.35);
+  margin-top: 1.25rem;
+}
+
+.festival-box-label {
+  font-family: var(--font-mono);
+  font-size: 0.69rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #8E6211;
+  margin-bottom: 0.25rem;
+}
+
+.festival-box-text {
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   Section 4: Flavors of Ceylon & Field Essentials Accordion
+   ========================================================================== */
+.culture-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.75rem;
+  align-items: start;
+}
+
+.culinary-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.culinary-card {
+  padding: 1.35rem 1.5rem;
+  border-radius: var(--radius-md);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 1.1rem;
+  align-items: start;
+}
+
+.culinary-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--bg-stone);
+  color: var(--accent-terracotta);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.culinary-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.culinary-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.accordion-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.accordion-item {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.accordion-trigger {
+  width: 100%;
+  padding: 1.15rem 1.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.accordion-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--bg-stone);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  transition: transform 0.25s ease;
+}
+
+.accordion-item[open] .accordion-icon {
+  transform: rotate(45deg);
+  background: var(--accent-terracotta);
+  color: #FFFFFF;
+}
+
+.accordion-content {
+  padding: 0 1.35rem 1.25rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 0.95rem;
+}
+
+/* Highland Railway Timetable Card */
+.rail-timetable-card {
+  margin-top: 2.5rem;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.rail-timetable-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.rail-timetable-title {
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  font-weight: 600;
+}
+
+.rail-seat-tip {
+  font-size: 0.75rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius-pill);
+  background: var(--bg-stone);
+  color: var(--accent-emerald);
+  font-weight: 600;
+}
+
+.rail-table-wrap {
+  overflow-x: auto;
+}
+
+.rail-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  text-align: left;
+}
+
+.rail-table th,
+.rail-table td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.rail-table th {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  background: var(--bg-canvas);
+}
+
+.rail-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.currency-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.currency-select {
+  background: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+  border: 1px solid var(--border-on-dark);
+  border-radius: var(--radius-sm);
+  padding: 0.3rem 0.55rem;
+  font-size: 0.75rem;
+}
+
+.currency-select option {
+  background: var(--bg-jungle);
+  color: #FFFFFF;
+}
+
+.estimate-lkr-equiv {
+  font-size: 0.78rem;
+  color: #B2C2BA;
+  margin-bottom: 0.5rem;
+}
+
+/* ==========================================================================
+   Section 5: Interactive Trip Builder & Budget Estimator
+   ========================================================================== */
+.planner-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  overflow: hidden;
+}
+
+.planner-controls {
+  padding: 2.25rem;
+}
+
+.planner-summary {
+  padding: 2.25rem;
+  background: var(--bg-jungle);
+  color: var(--text-on-dark);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.15rem;
+  margin-bottom: 1.35rem;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.field-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.field-input,
+.field-select {
+  padding: 0.72rem 0.95rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-strong);
+  background: var(--bg-canvas);
+  font-size: 0.92rem;
+}
+
+.tier-selector {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.65rem;
+  margin-bottom: 1.45rem;
+}
+
+.tier-btn {
+  padding: 0.8rem 0.75rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-canvas);
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.tier-btn.is-active {
+  border-color: var(--accent-terracotta);
+  background: rgba(196, 85, 45, 0.07);
+}
+
+.tier-name {
+  display: block;
+  font-weight: 600;
+  font-size: 0.86rem;
+}
+
+.tier-rate {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+
+.saved-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.stop-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.42rem 0.8rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.8rem;
+  font-weight: 500;
+  background: var(--bg-stone);
+  border: 1px solid transparent;
+  transition: all 0.18s ease;
+}
+
+.stop-chip.is-selected {
+  background: var(--accent-emerald);
+  color: #FFFFFF;
+}
+
+.estimate-total-amount {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4vw, 3.2rem);
+  font-weight: 600;
+  color: #F6D899;
+  line-height: 1.05;
+  margin: 0.35rem 0 0.25rem;
+}
+
+.estimate-Sub {
+  font-size: 0.82rem;
+  color: var(--text-on-dark-muted);
+  margin-bottom: 1.5rem;
+}
+
+.estimate-breakdown {
+  list-style: none;
+  border-top: 1px solid var(--border-on-dark);
+  border-bottom: 1px solid var(--border-on-dark);
+  padding: 1rem 0;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  font-size: 0.86rem;
+}
+
+.estimate-breakdown li {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-on-dark-muted);
+}
+
+.estimate-breakdown li span:last-child {
+  font-family: var(--font-mono);
+  color: #FFFFFF;
+}
+
+.planner-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.toast-feedback {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: #5CE0A0;
+  min-height: 1.2em;
+  text-align: center;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.site-footer {
+  background: #091712;
+  color: var(--text-on-dark-muted);
+  padding: 4rem 0 2.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 2rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-heading {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #F3CA7A;
+  margin-bottom: 0.9rem;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  font-size: 0.88rem;
+}
+
+.footer-links a:hover {
+  color: #FFFFFF;
+}
+
+.footer-bottom {
+  padding-top: 1.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.8rem;
+}
+
+/* ==========================================================================
+   Destination Field Guide Modal
+   ========================================================================== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(8, 18, 14, 0.72);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.modal-backdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-dialog {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  width: min(760px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-modal);
+  transform: translateY(14px);
+  transition: transform 0.28s var(--ease-out);
+}
+
+.modal-backdrop.is-open .modal-dialog {
+  transform: translateY(0);
+}
+
+.modal-hero {
+  position: relative;
+  height: 270px;
+}
+
+.modal-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(14, 34, 27, 0.82);
+  color: #FFFFFF;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-body {
+  padding: 1.85rem 2rem 2rem;
+}
+
+.modal-specs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.85rem;
+  margin: 1.25rem 0;
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  background: var(--bg-stone);
+}
+
+.modal-spec-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.modal-spec-val {
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Responsive Breakpoints
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .nav-links,
+  .live-clock-pill {
+    display: none;
+  }
+
+  .mobile-menu-toggle {
+    display: inline-flex;
+  }
+
+  .site-header.menu-open .nav-links {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--bg-canvas);
+    color: var(--text-primary);
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-soft);
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .hero-content,
+  .routes-layout,
+  .season-dashboard,
+  .culture-grid,
+  .planner-card {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-dispatch-card {
+    justify-self: start;
+    max-width: 100%;
+  }
+
+  .destinations-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .telemetry-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .telemetry-item:nth-child(2) {
+    border-right: none;
+  }
+
+  .month-selector {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .destinations-grid,
+  .route-tabs,
+  .tier-selector,
+  .form-row,
+  .modal-specs,
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .month-selector {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .telemetry-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .telemetry-item {
+    padding: 1rem 0.75rem;
+  }
+
+  .route-stop-item {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+
+  .planner-controls,
+  .planner-summary {
+    padding: 1.5rem;
+  }
+}
+
+/* Clean Print Stylesheet for Itinerary Export */
+@media print {
+  .site-header,
+  .hero-cta-group,
+  .filter-bar,
+  .site-footer,
+  .planner-actions {
+    display: none !important;
+  }
+  body {
+    background: #FFFFFF;
+    color: #000000;
+  }
+}

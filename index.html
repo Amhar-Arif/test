@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Serendib · Sri Lanka — Island Field Guide &amp; Journey Planner</title>
+  <meta
+    name="description"
+    content="Discover Sri Lanka: from Sigiriya's ancient sky citadel and misty Ceylon tea railways in Ella to leopard safaris in Yala and palm-fringed southern bays."
+  />
+  <meta name="theme-color" content="#0E221B" />
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Serendib · Sri Lanka — Island Field Guide &amp; Journey Planner" />
+  <meta
+    property="og:description"
+    content="Curated routes, dual-monsoon coast finder, and interactive Sri Lanka travel guide."
+  />
+  <meta property="og:image" content="./assets/images/sigiriya-hero.jpg" />
+
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+
+  <!-- Editorial & Technical Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="./styles.css" />
+
+  <!-- Structured Data for Search Engines -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TouristDestination",
+      "name": "Sri Lanka",
+      "alternateName": "Serendib — Pearl of the Indian Ocean",
+      "description": "An island nation in South Asia celebrated for ancient Buddhist citadels, misty highland tea railways, wildlife sanctuaries, and tropical Indian Ocean coastlines.",
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 7.8731,
+        "longitude": 80.7718
+      }
+    }
+  </script>
+</head>
+<body>
+  <!-- ====================================================================
+       Sticky Editorial Header
+       ==================================================================== -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a href="#top" class="brand-mark" aria-label="Serendib Sri Lanka Home">
+        <img src="./favicon.svg" alt="" class="brand-lotus" width="34" height="34" />
+        <span class="brand-text">
+          <span class="brand-title">Serendib</span>
+          <span class="brand-subtitle">Sri Lanka · 07°52'N</span>
+        </span>
+      </a>
+
+      <nav aria-label="Primary Navigation">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#destinations">Destinations</a></li>
+          <li><a href="#routes">Island Routes</a></li>
+          <li><a href="#seasons">Monsoon Guide</a></li>
+          <li><a href="#culture">Ceylon Culture</a></li>
+          <li><a href="#planner">Trip Estimator</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <div class="live-clock-pill" title="Current local time in Colombo, Sri Lanka (UTC+5:30)">
+          <span class="pulse-dot" aria-hidden="true"></span>
+          <span id="colomboClock">CMB --:-- IST</span>
+        </div>
+
+        <a href="#planner" class="btn btn-primary btn-sm">
+          <span>My Route</span>
+          <span class="itinerary-badge-count" id="savedCountBadge">3</span>
+        </a>
+
+        <button
+          type="button"
+          class="mobile-menu-toggle"
+          id="mobileMenuBtn"
+          aria-expanded="false"
+          aria-controls="navLinks"
+          aria-label="Toggle navigation menu"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ====================================================================
+         Full-Bleed Hero Section
+         ==================================================================== -->
+    <section class="hero" aria-label="Introduction to Sri Lanka">
+      <div class="hero-media">
+        <img
+          src="./assets/images/sigiriya-hero.jpg"
+          alt="Golden hour sunrise illuminating Sigiriya Lion Rock fortress rising above misty emerald jungle in Sri Lanka"
+          fetchpriority="high"
+        />
+        <div class="hero-scrim"></div>
+      </div>
+
+      <div class="container hero-content">
+        <div>
+          <div class="hero-eyebrow">
+            <span class="hero-eyebrow-line" aria-hidden="true"></span>
+            <span>07°57'25"N 80°45'35"E · Pearl of the Indian Ocean</span>
+          </div>
+
+          <h1 class="hero-headline">
+            Where Emerald Highlands Meet <em>Ancient Kingdoms</em>
+          </h1>
+
+          <p class="hero-lead">
+            Within a single morning in Sri Lanka, you can climb a fifth-century sky palace above misty jungle canopy,
+            board a cobalt-blue train through high-grown tea estates, and watch Indian Ocean rollers break against
+            coral ramparts at dusk.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#routes" class="btn btn-primary">Explore Curated Routes</a>
+            <a href="#seasons" class="btn btn-glass">Find Best Coast by Month</a>
+          </div>
+        </div>
+
+        <aside class="hero-dispatch-card" aria-label="Seasonal Island Dispatch">
+          <div class="dispatch-label" id="heroSeasonLabel">Current Dispatch · Island Conditions</div>
+          <h2 class="dispatch-title" id="heroSeasonTitle">South Coast &amp; Hill Country Prime Window</h2>
+          <p class="dispatch-desc" id="heroSeasonDesc">
+            Calm turquoise swells from Galle to Mirissa, crisp dawn visibility atop Ella Rock, and active leopard sightings across Yala.
+          </p>
+          <a href="#seasons" class="dispatch-link">
+            <span>Open 12-month monsoon compass</span>
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+        </aside>
+      </div>
+
+      <div class="hero-telemetry">
+        <div class="container telemetry-grid">
+          <div class="telemetry-item">
+            <div class="telemetry-value">8 UNESCO</div>
+            <div class="telemetry-label">World Heritage cultural &amp; biosphere sites</div>
+          </div>
+          <div class="telemetry-item">
+            <div class="telemetry-value">1,340 km</div>
+            <div class="telemetry-label">Palm-lined Indian Ocean surf &amp; reef bays</div>
+          </div>
+          <div class="telemetry-item">
+            <div class="telemetry-value">2,524 m</div>
+            <div class="telemetry-label">Cloud-forest peaks &amp; Ceylon tea terraces</div>
+          </div>
+          <div class="telemetry-item">
+            <div class="telemetry-value">365 Days</div>
+            <div class="telemetry-label">Year-round sunshine via dual-coast monsoons</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         Section 1: Signature Destinations Showcase
+         ==================================================================== -->
+    <section class="section" id="destinations">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <span class="section-eyebrow">01 · Essential Chapters</span>
+            <h2 class="section-title">Six Landscapes, <em>One Teardrop Isle</em></h2>
+          </div>
+          <p class="section-subtitle">
+            Filter by geography to inspect transit logistics, ideal months, and insider field notes—or bookmark stops directly into your custom trip estimator.
+          </p>
+        </div>
+
+        <div class="filter-bar" role="tablist" aria-label="Filter destinations by region">
+          <button type="button" class="filter-pill is-active" data-filter="all" role="tab" aria-selected="true">
+            All Regions (6)
+          </button>
+          <button type="button" class="filter-pill" data-filter="cultural" role="tab" aria-selected="false">
+            Cultural Triangle &amp; Kandy
+          </button>
+          <button type="button" class="filter-pill" data-filter="highlands" role="tab" aria-selected="false">
+            Tea Highlands
+          </button>
+          <button type="button" class="filter-pill" data-filter="coast" role="tab" aria-selected="false">
+            Southern Coast
+          </button>
+          <button type="button" class="filter-pill" data-filter="wildlife" role="tab" aria-selected="false">
+            Wild Safari Parks
+          </button>
+        </div>
+
+        <div class="destinations-grid" id="destinationsGrid">
+          <!-- Populated progressively & enhanced via app.js, with static SEO fallback cards -->
+          <article class="dest-card" data-region="cultural" data-id="sigiriya">
+            <div class="dest-card-media">
+              <img src="./assets/images/sigiriya-hero.jpg" alt="Sigiriya Lion Rock Citadel at dawn" loading="lazy" />
+              <span class="dest-region-tag">Cultural Triangle</span>
+              <button type="button" class="dest-save-btn is-saved" data-save-id="sigiriya" aria-label="Toggle Sigiriya in itinerary" title="Save to My Route">
+                &#10003;
+              </button>
+            </div>
+            <div class="dest-card-body">
+              <div class="dest-meta-row">
+                <span>07°57'N · 349m Elev</span>
+                <span>UNESCO 1982</span>
+              </div>
+              <h3 class="dest-card-title">Sigiriya Lion Rock</h3>
+              <p class="dest-card-summary">
+                King Kashyapa's 5th-century sky fortress crowned with sunken palace ruins, mirror walls, frescoes, and symmetrical lotus water gardens.
+              </p>
+              <div class="dest-card-footer">
+                <span class="dest-best-months">Best: <strong>Jan – Sep</strong></span>
+                <button type="button" class="dest-inspect-btn" data-inspect-id="sigiriya">
+                  Field Guide <span aria-hidden="true">&rarr;</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="dest-card" data-region="highlands" data-id="ella">
+            <div class="dest-card-media">
+              <img src="./assets/images/ella-train.jpg" alt="Blue hill country train crossing Nine Arch Bridge in Ella" loading="lazy" />
+              <span class="dest-region-tag">Tea Highlands</span>
+              <button type="button" class="dest-save-btn is-saved" data-save-id="ella" aria-label="Toggle Ella in itinerary" title="Save to My Route">
+                &#10003;
+              </button>
+            </div>
+            <div class="dest-card-body">
+              <div class="dest-meta-row">
+                <span>06°52'N · 1,041m Elev</span>
+                <span>Uva Province</span>
+              </div>
+              <h3 class="dest-card-title">Ella &amp; Nine Arch Viaduct</h3>
+              <p class="dest-card-summary">
+                Ride the legendary Kandy-to-Ella mountain railway past waterfalls and emerald tea estates to colonial stone viaducts and Little Adam's Peak.
+              </p>
+              <div class="dest-card-footer">
+                <span class="dest-best-months">Best: <strong>Dec – Apr</strong></span>
+                <button type="button" class="dest-inspect-btn" data-inspect-id="ella">
+                  Field Guide <span aria-hidden="true">&rarr;</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="dest-card" data-region="coast" data-id="mirissa">
+            <div class="dest-card-media">
+              <img src="./assets/images/mirissa-beach.jpg" alt="Coconut Tree Hill palm headland in Mirissa overlooking turquoise surf" loading="lazy" />
+              <span class="dest-region-tag">Southern Coast</span>
+              <button type="button" class="dest-save-btn is-saved" data-save-id="mirissa" aria-label="Toggle Mirissa in itinerary" title="Save to My Route">
+                &#10003;
+              </button>
+            </div>
+            <div class="dest-card-body">
+              <div class="dest-meta-row">
+                <span>05°56'N · Sea Level</span>
+                <span>Southern Bay</span>
+              </div>
+              <h3 class="dest-card-title">Mirissa &amp; Coconut Hill</h3>
+              <p class="dest-card-summary">
+                Golden crescent coves, reef-sheltered surf breaks, red-laterite palm headlands, and seasonal blue whale migrations just offshore.
+              </p>
+              <div class="dest-card-footer">
+                <span class="dest-best-months">Best: <strong>Nov – Apr</strong></span>
+                <button type="button" class="dest-inspect-btn" data-inspect-id="mirissa">
+                  Field Guide <span aria-hidden="true">&rarr;</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="dest-card" data-region="coast" data-id="galle">
+            <div class="dest-card-media">
+              <img src="./assets/images/galle-fort.jpg" alt="Historic whitewashed lighthouse and ocean ramparts of Galle Fort" loading="lazy" />
+              <span class="dest-region-tag">Heritage Coast</span>
+              <button type="button" class="dest-save-btn" data-save-id="galle" aria-label="Toggle Galle Fort in itinerary" title="Save to My Route">
+                +
+              </button>
+            </div>
+            <div class="dest-card-body">
+              <div class="dest-meta-row">
+                <span>06°01'N · UNESCO 1988</span>
+                <span>Dutch Ramparts</span>
+              </div>
+              <h3 class="dest-card-title">Galle Dutch Fort</h3>
+              <p class="dest-card-summary">
+                A living 16th-century walled quarter where coral-stone bastions, spice-merchant mansions, independent ateliers, and ocean sunsets converge.
+              </p>
+              <div class="dest-card-footer">
+                <span class="dest-best-months">Best: <strong>Nov – Apr</strong></span>
+                <button type="button" class="dest-inspect-btn" data-inspect-id="galle">
+                  Field Guide <span aria-hidden="true">&rarr;</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="dest-card" data-region="wildlife" data-id="yala">
+            <div class="dest-card-media">
+              <img src="./assets/images/yala-leopard.jpg" alt="Wild Sri Lankan leopard resting on granite boulder in Yala National Park" loading="lazy" />
+              <span class="dest-region-tag">Wild Parks</span>
+              <button type="button" class="dest-save-btn" data-save-id="yala" aria-label="Toggle Yala National Park in itinerary" title="Save to My Route">
+                +
+              </button>
+            </div>
+            <div class="dest-card-body">
+              <div class="dest-meta-row">
+                <span>06°22'N · 979 km²</span>
+                <span>Dry-Zone Safari</span>
+              </div>
+              <h3 class="dest-card-title">Yala National Park</h3>
+              <p class="dest-card-summary">
+                Graniteinselbergs, brackish lagoons, sloth bears, Asian elephants, and one of Earth's highest densities of wild leopards.
+              </p>
+              <div class="dest-card-footer">
+                <span class="dest-best-months">Best: <strong>Feb – Jul</strong></span>
+                <button type="button" class="dest-inspect-btn" data-inspect-id="yala">
+                  Field Guide <span aria-hidden="true">&rarr;</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="dest-card" data-region="cultural" data-id="kandy">
+            <div class="dest-card-media">
+              <img src="./assets/images/kandy-temple.jpg" alt="Temple of the Sacred Tooth Relic illuminated at dusk beside Kandy Lake" loading="lazy" />
+              <span class="dest-region-tag">Sacred Hill Capital</span>
+              <button type="button" class="dest-save-btn" data-save-id="kandy" aria-label="Toggle Kandy in itinerary" title="Save to My Route">
+                +
+              </button>
+            </div>
+            <div class="dest-card-body">
+              <div class="dest-meta-row">
+                <span>07°17'N · 500m Elev</span>
+                <span>UNESCO 1988</span>
+              </div>
+              <h3 class="dest-card-title">Kandy &amp; Sacred Tooth Temple</h3>
+              <p class="dest-card-summary">
+                The last royal capital of Sinhala kings, cradling Kandy Lake, Peradeniya Royal Botanical Gardens, and the revered Sri Dalada Maligawa.
+              </p>
+              <div class="dest-card-footer">
+                <span class="dest-best-months">Best: <strong>Dec – Apr, Aug</strong></span>
+                <button type="button" class="dest-inspect-btn" data-inspect-id="kandy">
+                  Field Guide <span aria-hidden="true">&rarr;</span>
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         Section 2: Interactive Island Route Explorer & SVG Map
+         ==================================================================== -->
+    <section class="section section-dark" id="routes">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <span class="section-eyebrow">02 · Topographical Loops</span>
+            <h2 class="section-title">Curated Island <em>Rail &amp; Coast Circuits</em></h2>
+          </div>
+          <p class="section-subtitle">
+            Compact distances mean never losing whole days to domestic flights. Select an itinerary duration or click any waypoint on the island map.
+          </p>
+        </div>
+
+        <div class="routes-layout">
+          <div>
+            <div class="route-tabs" role="tablist" aria-label="Curated Sri Lanka route durations">
+              <button type="button" class="route-tab" data-route="7day" role="tab" aria-selected="false">
+                <span class="route-tab-duration">07 Days · Express</span>
+                <span class="route-tab-name">Cultural &amp; Hill Essence</span>
+              </button>
+              <button type="button" class="route-tab is-active" data-route="10day" role="tab" aria-selected="true">
+                <span class="route-tab-duration">10 Days · Signature</span>
+                <span class="route-tab-name">Citadels, Tea &amp; Surf</span>
+              </button>
+              <button type="button" class="route-tab" data-route="14day" role="tab" aria-selected="false">
+                <span class="route-tab-duration">14 Days · Grand Loop</span>
+                <span class="route-tab-name">Complete Island Odyssey</span>
+              </button>
+            </div>
+
+            <div class="route-detail-panel" id="routeDetailPanel">
+              <div class="route-summary-bar">
+                <div>
+                  <span class="route-stat-label">Total Overland</span>
+                  <span class="route-stat-val mono" id="routeDistance">~690 km</span>
+                </div>
+                <div>
+                  <span class="route-stat-label">Signature Leg</span>
+                  <span class="route-stat-val" id="routeHighlightLeg">Kandy &rarr; Ella Scenic Rail</span>
+                </div>
+                <div>
+                  <span class="route-stat-label">Ideal Pace</span>
+                  <span class="route-stat-val" id="routePace">2 Nights per Base</span>
+                </div>
+              </div>
+
+              <ol class="route-stops-list" id="routeStopsList">
+                <!-- Populated dynamically by app.js -->
+              </ol>
+            </div>
+          </div>
+
+          <!-- Handcrafted Interactive Sri Lanka SVG Map -->
+          <aside class="map-card" aria-label="Interactive Sri Lanka Waypoint Map">
+            <div class="map-card-header">
+              <span class="map-card-title">Sri Lanka Waypoint Atlas</span>
+              <span class="mono" style="font-size: 0.72rem; color: #B2C2BA;">Click any pin</span>
+            </div>
+
+            <div class="sri-lanka-svg-wrap">
+              <svg viewBox="0 0 360 500" role="img" aria-label="Map of Sri Lanka showing major travel stops">
+                <!-- Subtle Ocean Graticule -->
+                <line x1="20" y1="140" x2="340" y2="140" stroke="rgba(255,255,255,0.05)" stroke-dasharray="3 3" />
+                <line x1="20" y1="280" x2="340" y2="280" stroke="rgba(255,255,255,0.05)" stroke-dasharray="3 3" />
+                <line x1="180" y1="20" x2="180" y2="480" stroke="rgba(255,255,255,0.05)" stroke-dasharray="3 3" />
+
+                <!-- Accurate Teardrop Silhouette of Sri Lanka -->
+                <path
+                  class="island-landmass"
+                  d="M142,32 C158,34 176,55 188,78 C203,104 228,136 248,176 C268,215 284,264 286,315 C288,362 271,406 238,434 C206,460 164,468 130,455 C102,444 84,416 79,380 C74,342 82,296 84,254 C86,212 85,172 97,134 C108,98 118,68 128,46 C132,37 136,31 142,32 Z"
+                />
+
+                <!-- Central Highland Massif Contour -->
+                <path
+                  class="island-highlands"
+                  d="M164,258 C188,255 212,275 218,308 C224,340 206,374 178,378 C151,382 136,356 138,322 C140,290 146,261 164,258 Z"
+                />
+
+                <!-- Dynamic Active Route Polyline -->
+                <polyline
+                  id="mapRoutePolyline"
+                  class="route-path-line"
+                  points="86,338 172,195 166,282 198,342 246,396 154,454 108,436"
+                />
+
+                <!-- Interactive Waypoint Nodes -->
+                <g class="map-node is-in-route" data-node="colombo" transform="translate(86, 338)" tabindex="0" role="button" aria-label="Colombo">
+                  <circle class="node-outer" r="12" />
+                  <circle class="node-core" r="5.5" />
+                  <text x="-60" y="4">Colombo</text>
+                </g>
+
+                <g class="map-node" data-node="trincomalee" transform="translate(234, 156)" tabindex="0" role="button" aria-label="Trincomalee">
+                  <circle class="node-outer" r="12" />
+                  <circle class="node-core" r="5.5" />
+                  <text x="11" y="4">Trincomalee</text>
+                </g>
+
+                <g class="map-node is-in-route" data-node="sigiriya" transform="translate(172, 195)" tabindex="0" role="button" aria-label="Sigiriya">
+                  <circle class="node-outer" r="12" />
+                  <circle class="node-core" r="5.5" />
+                  <text x="11" y="4">Sigiriya</text>
+                </g>
+
+                <g class="map-node is-in-route" data-node="kandy" transform="translate(166, 282)" tabindex="0" role="button" aria-label="Kandy">
+                  <circle class="node-outer" r="12" />
+                  <circle class="node-core" r="5.5" />
+                  <text x="-48" y="4">Kandy</text>
+                </g>
+
+                <g class="map-node is-in-route" data-node="ella" transform="translate(198, 342)" tabindex="0" role="button" aria-label="Ella">
+                  <circle class="node-outer" r="12" />
+                  <circle class="node-core" r="5.5" />
+                  <text x="11" y="4">Ella</text>
+                </g>
+
+                <g class="map-node is-in-route" data-node="yala" transform="translate(246, 396)" tabindex="0" role="button" aria-label="Yala">
+                  <circle class="node-outer" r="12" />
+                  <circle class="node-core" r="5.5" />
+                  <text x="11" y="4">Yala</text>
+                </g>
+
+                <g class="map-node is-in-route" data-node="mirissa" transform="translate(154, 454)" tabindex="0" role="button" aria-label="Mirissa">
+                  <circle class="node-outer" r="12" />
+                  <circle class="node-core" r="5.5" />
+                  <text x="10" y="15">Mirissa</text>
+                </g>
+
+                <g class="map-node is-in-route" data-node="galle" transform="translate(108, 436)" tabindex="0" role="button" aria-label="Galle Fort">
+                  <circle class="node-outer" r="12" />
+                  <circle class="node-core" r="5.5" />
+                  <text x="-64" y="5">Galle Fort</text>
+                </g>
+              </svg>
+            </div>
+
+            <div class="map-active-readout" id="mapReadout">
+              <div class="map-readout-name" id="mapReadoutName">Sigiriya &amp; Dambulla</div>
+              <p class="map-readout-info" id="mapReadoutInfo">
+                3.5 hrs northeast of Colombo Airport · Ascend at 06:30 AM before tropical midday heat; pair with Pidurangala sunset.
+              </p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         Section 3: Dual-Monsoon Seasonality Finder
+         ==================================================================== -->
+    <section class="section section-stone" id="seasons">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <span class="section-eyebrow">03 · Dual-Monsoon Compass</span>
+            <h2 class="section-title">A Year-Round Island—<em>Pick the Right Coast</em></h2>
+          </div>
+          <p class="section-subtitle">
+            Sri Lanka's central mountains split two opposite monsoons (<em>Maha</em> &amp; <em>Yala</em>). While one coast sees tropical showers, the opposite shoreline basks in calm blue skies.
+          </p>
+        </div>
+
+        <div class="month-selector" id="monthSelector" role="tablist" aria-label="Select month of travel">
+          <button type="button" class="month-btn" data-month="0">Jan</button>
+          <button type="button" class="month-btn" data-month="1">Feb</button>
+          <button type="button" class="month-btn" data-month="2">Mar</button>
+          <button type="button" class="month-btn" data-month="3">Apr</button>
+          <button type="button" class="month-btn" data-month="4">May</button>
+          <button type="button" class="month-btn" data-month="5">Jun</button>
+          <button type="button" class="month-btn" data-month="6">Jul</button>
+          <button type="button" class="month-btn" data-month="7">Aug</button>
+          <button type="button" class="month-btn" data-month="8">Sep</button>
+          <button type="button" class="month-btn" data-month="9">Oct</button>
+          <button type="button" class="month-btn is-active" data-month="10">Nov</button>
+          <button type="button" class="month-btn" data-month="11">Dec</button>
+        </div>
+
+        <div class="season-dashboard">
+          <div class="season-regions-card">
+            <h3 class="season-month-heading" id="seasonMonthHeading">November — South Coast Awakening</h3>
+            <p class="season-verdict" id="seasonVerdict">
+              Inter-monsoon showers clear toward crisp mornings; southern bays open for whale watching and early-season surf.
+            </p>
+
+            <div class="region-bars">
+              <div class="region-bar-row">
+                <div class="region-bar-top">
+                  <span>South &amp; West Coast (Galle, Mirissa, Bentota)</span>
+                  <span class="region-rating-badge" id="rateSouthText">85% Prime</span>
+                </div>
+                <div class="meter-track"><div class="meter-fill" id="rateSouthBar" style="width: 85%"></div></div>
+              </div>
+
+              <div class="region-bar-row">
+                <div class="region-bar-top">
+                  <span>Central Tea Highlands (Kandy, Nuwara Eliya, Ella)</span>
+                  <span class="region-rating-badge" id="rateHillText">78% Crisp Mornings</span>
+                </div>
+                <div class="meter-track"><div class="meter-fill" id="rateHillBar" style="width: 78%"></div></div>
+              </div>
+
+              <div class="region-bar-row">
+                <div class="region-bar-top">
+                  <span>Cultural Triangle (Sigiriya, Polonnaruwa, Anuradhapura)</span>
+                  <span class="region-rating-badge" id="rateCultureText">80% Lush Green</span>
+                </div>
+                <div class="meter-track"><div class="meter-fill" id="rateCultureBar" style="width: 80%"></div></div>
+              </div>
+
+              <div class="region-bar-row">
+                <div class="region-bar-top">
+                  <span>East Coast (Trincomalee, Pasikudah, Arugam Bay)</span>
+                  <span class="region-rating-badge" id="rateEastText">40% Maha Showers</span>
+                </div>
+                <div class="meter-track"><div class="meter-fill" id="rateEastBar" style="width: 40%"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="season-highlight-card">
+            <div>
+              <span class="section-eyebrow">Recommended Focus</span>
+              <h4 style="font-family: var(--font-display); font-size: 1.6rem; margin-bottom: 0.5rem;" id="seasonBestRoute">
+                Galle Ramparts &amp; Misty Highland Rail
+              </h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary);" id="seasonPackingTip">
+                Pack breathable linen for humid coastal afternoons, a light rain shell for brief dusk showers, and a warm fleece layer for 14°C nights in Nuwara Eliya.
+              </p>
+
+              <div class="festival-box">
+                <div class="festival-box-label">Cultural Calendar &amp; Wildlife</div>
+                <div class="festival-box-text" id="seasonFestivalText">
+                  Il Full Moon Poya illuminations &amp; opening of the Mirissa blue whale migration channel.
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top: 1.5rem;">
+              <a href="#planner" class="btn btn-outline" style="width: 100%;">
+                Use This Month in Trip Estimator
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         Section 4: Flavors of Ceylon & Practical Field Essentials
+         ==================================================================== -->
+    <section class="section" id="culture">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <span class="section-eyebrow">04 · Table &amp; Etiquette</span>
+            <h2 class="section-title">Cinnamon, High-Grown Tea &amp; <em>Island Know-How</em></h2>
+          </div>
+          <p class="section-subtitle">
+            True cinnamon (<em>Cinnamomum verum</em>) is native to Sri Lanka. Pair culinary rituals with practical logistics for seamless independent travel.
+          </p>
+        </div>
+
+        <div class="culture-grid">
+          <div class="culinary-list">
+            <article class="culinary-card">
+              <div class="culinary-icon" aria-hidden="true">01</div>
+              <div>
+                <h3 class="culinary-title">Bowl-Shaped Egg Hoppers (Appa)</h3>
+                <p class="culinary-desc">
+                  Crisp, lacy fermented rice-flour and coconut-milk crepes cradling a soft-yolk egg—served hot off iron pans with fiery caramelized onion <em>seeni sambol</em>.
+                </p>
+              </div>
+            </article>
+
+            <article class="culinary-card">
+              <div class="culinary-icon" aria-hidden="true">02</div>
+              <div>
+                <h3 class="culinary-title">Single-Estate Pure Ceylon Tea</h3>
+                <p class="culinary-desc">
+                  Taste delicate golden-liquor Orange Pekoe in high-elevation Nuwara Eliya (1,868m) versus bold, malty low-grown Ruhuna teas near the southern rainforests.
+                </p>
+              </div>
+            </article>
+
+            <article class="culinary-card">
+              <div class="culinary-icon" aria-hidden="true">03</div>
+              <div>
+                <h3 class="culinary-title">Rice &amp; Curry Clay-Pot Banquets</h3>
+                <p class="culinary-desc">
+                  Slow-simmered jackfruit (<em>polos</em>), smoky southern fish ambul thiyal soured with goraka, tempered red dhal, and fresh grated coconut <em>pol sambol</em>.
+                </p>
+              </div>
+            </article>
+          </div>
+
+          <div class="accordion-list">
+            <details class="accordion-item" open>
+              <summary class="accordion-trigger">
+                <span>Booking the Kandy-to-Ella Scenic Train</span>
+                <span class="accordion-icon" aria-hidden="true">+</span>
+              </summary>
+              <div class="accordion-content">
+                Reserved 1st, 2nd, and Observation Saloon seats open exactly <strong>30 days prior to departure</strong> via the official Sri Lanka Railways portal. Sit on the <strong>right side</strong> from Kandy to Nuwara Eliya (Nanu Oya), and the <strong>left side</strong> from Nanu Oya to Ella for sweeping valley panoramas.
+              </div>
+            </details>
+
+            <details class="accordion-item">
+              <summary class="accordion-trigger">
+                <span>Electronic Travel Authorization (ETA) &amp; Entry</span>
+                <span class="accordion-icon" aria-hidden="true">+</span>
+              </summary>
+              <div class="accordion-content">
+                Most international visitors obtain a 30-day double-entry Tourist ETA online prior to boarding for Bandaranaike International Airport (CMB). Ensure six months of passport validity and a return or onward ticket.
+              </div>
+            </details>
+
+            <details class="accordion-item">
+              <summary class="accordion-trigger">
+                <span>Sacred Temple Dress &amp; Photography Etiquette</span>
+                <span class="accordion-icon" aria-hidden="true">+</span>
+              </summary>
+              <div class="accordion-content">
+                Cover shoulders and knees (light cotton sarongs are handy) and remove shoes and hats before entering Buddhist stupas or Hindu kovils. Never pose with your back turned directly toward a Buddha statue—stand respectfully beside it instead.
+              </div>
+            </details>
+
+            <details class="accordion-item">
+              <summary class="accordion-trigger">
+                <span>Currency (LKR), Connectivity &amp; Tuk-Tuk Apps</span>
+                <span class="accordion-icon" aria-hidden="true">+</span>
+              </summary>
+              <div class="accordion-content">
+                Pick up a local Dialog or Mobitel tourist eSIM/SIM right in the CMB arrivals hall for reliable 4G/5G island coverage. Download <strong>PickMe</strong> or Uber in Colombo, Kandy, and Galle for transparent metered three-wheeler fares, and carry small Sri Lankan Rupee (LKR) notes for rural king-coconut roadside stalls.
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <!-- Scenic Highland Railway Timetable Reference -->
+        <div class="rail-timetable-card" aria-label="Kandy to Ella Scenic Train Timetable">
+          <div class="rail-timetable-header">
+            <div>
+              <span class="section-eyebrow" style="margin-bottom: 0.25rem;">Main Line Railway Dispatch</span>
+              <h3 class="rail-timetable-title">Kandy &rarr; Nuwara Eliya (Nanu Oya) &rarr; Ella Express Schedule</h3>
+            </div>
+            <span class="rail-seat-tip mono">Best Window: Right (Kandy–Nanu Oya) · Left (Nanu Oya–Ella)</span>
+          </div>
+
+          <div class="rail-table-wrap">
+            <table class="rail-table">
+              <thead>
+                <tr>
+                  <th>Train Name &amp; No.</th>
+                  <th>Departs Kandy</th>
+                  <th>Nanu Oya (Tea Hills)</th>
+                  <th>Arrives Ella</th>
+                  <th>Classes Available</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Ella Odyssey</strong> <span class="mono">#1045</span> (Photo-Stop Special)</td>
+                  <td class="mono">07:30</td>
+                  <td class="mono">11:50</td>
+                  <td class="mono">14:15</td>
+                  <td>1st A/C · 2nd Reserved · 3rd Reserved</td>
+                </tr>
+                <tr>
+                  <td><strong>Podi Menike</strong> <span class="mono">#1005</span></td>
+                  <td class="mono">08:47</td>
+                  <td class="mono">12:40</td>
+                  <td class="mono">15:14</td>
+                  <td>Observation Saloon · 1st · 2nd · 3rd</td>
+                </tr>
+                <tr>
+                  <td><strong>Udarata Menike</strong> <span class="mono">#1015</span></td>
+                  <td class="mono">11:10</td>
+                  <td class="mono">15:00</td>
+                  <td class="mono">17:25</td>
+                  <td>1st A/C · 2nd Reserved · 3rd</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         Section 5: Interactive Trip Builder & Budget Estimator
+         ==================================================================== -->
+    <section class="section section-stone" id="planner">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <span class="section-eyebrow">05 · Static Journey Builder</span>
+            <h2 class="section-title">Assemble &amp; Export Your <em>Sri Lanka Brief</em></h2>
+          </div>
+          <p class="section-subtitle">
+            Customize your travel style, party size, and saved stops to calculate realistic on-the-ground costs—then copy or print a clean itinerary dossier.
+          </p>
+        </div>
+
+        <div class="planner-card">
+          <div class="planner-controls">
+            <div class="form-row">
+              <div class="field-group">
+                <label class="field-label" for="planDays">Trip Duration (Days)</label>
+                <input
+                  type="number"
+                  id="planDays"
+                  class="field-input mono"
+                  min="4"
+                  max="30"
+                  value="10"
+                />
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="planTravelers">Travelers</label>
+                <select id="planTravelers" class="field-select">
+                  <option value="1">1 Solo Traveler</option>
+                  <option value="2" selected>2 Travelers (Couple / Pair)</option>
+                  <option value="4">4 Travelers (Small Group / Family)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field-group" style="margin-bottom: 0.55rem;">
+              <span class="field-label">Comfort &amp; Stay Style (Per Person / Day)</span>
+            </div>
+            <div class="tier-selector" role="radiogroup" aria-label="Select travel comfort style">
+              <button type="button" class="tier-btn" data-tier="backpacker" data-rate="55">
+                <span class="tier-name">Homestay &amp; Rail</span>
+                <span class="tier-rate">~$55 / day</span>
+              </button>
+              <button type="button" class="tier-btn is-active" data-tier="boutique" data-rate="145">
+                <span class="tier-name">Boutique &amp; Driver</span>
+                <span class="tier-rate">~$145 / day</span>
+              </button>
+              <button type="button" class="tier-btn" data-tier="luxury" data-rate="340">
+                <span class="tier-name">Tea Bungalow Luxury</span>
+                <span class="tier-rate">~$340 / day</span>
+              </button>
+            </div>
+
+            <div class="field-group">
+              <span class="field-label">Toggle Stops in Your Route</span>
+              <div class="saved-chips" id="plannerStopChips">
+                <!-- Interactive chips synced with destination cards -->
+              </div>
+            </div>
+          </div>
+
+          <div class="planner-summary">
+            <div>
+              <div class="currency-bar">
+                <span class="section-eyebrow" style="margin-bottom: 0;">Estimated Ground Budget</span>
+                <label class="sr-only" for="planCurrency">Display Currency</label>
+                <select id="planCurrency" class="currency-select mono" aria-label="Select display currency">
+                  <option value="USD" selected>USD ($)</option>
+                  <option value="EUR">EUR (&euro;)</option>
+                  <option value="GBP">GBP (&pound;)</option>
+                  <option value="AUD">AUD (A$)</option>
+                  <option value="LKR">LKR (Rs)</option>
+                </select>
+              </div>
+              <div class="estimate-total-amount mono" id="estimateTotal">$2,900</div>
+              <div class="estimate-lkr-equiv mono" id="estimateLkrEquiv">&asymp; Rs 870,000 LKR</div>
+              <p class="estimate-Sub" id="estimateSubtitle">
+                For 2 travelers · 10 days · Boutique &amp; Private Chauffeur tier (excludes international flights)
+              </p>
+
+              <ul class="estimate-breakdown">
+                <li>
+                  <span>Stays &amp; Breakfasts</span>
+                  <span id="costStays">$1,680</span>
+                </li>
+                <li>
+                  <span>Transport &amp; Scenic Rail</span>
+                  <span id="costTransport">$580</span>
+                </li>
+                <li>
+                  <span>Heritage &amp; Safari Permits</span>
+                  <span id="costPermits">$320</span>
+                </li>
+                <li>
+                  <span>Dining &amp; Ceylon Experiences</span>
+                  <span id="costDining">$320</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="planner-actions">
+              <button type="button" class="btn btn-primary" id="copyBriefBtn" style="width: 100%;">
+                Copy Custom Itinerary Summary
+              </button>
+              <button type="button" class="btn btn-glass" id="downloadBriefBtn" style="width: 100%;">
+                Download .TXT Field Dossier
+              </button>
+              <div class="toast-feedback" id="plannerToast" role="status" aria-live="polite"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ====================================================================
+       Footer
+       ==================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="#top" class="brand-mark" style="color: #FAF6F0; margin-bottom: 0.85rem;">
+            <img src="./favicon.svg" alt="" class="brand-lotus" width="32" height="32" />
+            <span class="brand-text">
+              <span class="brand-title">Serendib</span>
+              <span class="brand-subtitle">Sri Lanka Field Guide</span>
+            </span>
+          </a>
+          <p style="font-size: 0.86rem; max-width: 34ch; line-height: 1.65;">
+            A lightweight, zero-dependency static travel portal crafted for ultra-fast global edge delivery on AWS S3 &amp; CloudFront.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="footer-heading">Regions</h3>
+          <ul class="footer-links">
+            <li><a href="#destinations">Cultural Triangle</a></li>
+            <li><a href="#destinations">Central Tea Highlands</a></li>
+            <li><a href="#destinations">Southern Surf &amp; Forts</a></li>
+            <li><a href="#destinations">Yala &amp; Wilpattu Parks</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="footer-heading">Planning Tools</h3>
+          <ul class="footer-links">
+            <li><a href="#routes">7 / 10 / 14-Day Circuits</a></li>
+            <li><a href="#seasons">Dual-Monsoon Compass</a></li>
+            <li><a href="#culture">Scenic Rail Seat Guide</a></li>
+            <li><a href="#planner">Ground Cost Estimator</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="footer-heading">Emergency &amp; Numbers</h3>
+          <ul class="footer-links mono" style="font-size: 0.8rem;">
+            <li>Tourist Police: 1912</li>
+            <li>Suwa Seriya Ambulance: 1990</li>
+            <li>Airport (CMB): +94 11 225 2861</li>
+            <li>Time Zone: UTC +05:30</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>&copy; <span id="footerYear">2026</span> Serendib Sri Lanka Travel Guide. Ready for AWS Static Hosting.</span>
+        <span class="mono">Ayubowan · ආයුබෝවන් · வணக்கம்</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ====================================================================
+       Destination Field Guide Modal
+       ==================================================================== -->
+  <div class="modal-backdrop" id="destModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+    <div class="modal-dialog">
+      <div class="modal-hero">
+        <img src="./assets/images/sigiriya-hero.jpg" alt="" id="modalImage" />
+        <button type="button" class="modal-close-btn" id="modalCloseBtn" aria-label="Close field guide">&times;</button>
+      </div>
+      <div class="modal-body">
+        <span class="section-eyebrow" id="modalRegion">Cultural Triangle</span>
+        <h3 style="font-family: var(--font-display); font-size: 2.1rem; line-height: 1.1;" id="modalTitle">
+          Sigiriya Lion Rock
+        </h3>
+        <p style="margin-top: 0.65rem; color: var(--text-secondary); font-size: 0.95rem;" id="modalDescription"></p>
+
+        <div class="modal-specs">
+          <div>
+            <span class="modal-spec-label">Transit Access</span>
+            <span class="modal-spec-val" id="modalTransit"></span>
+          </div>
+          <div>
+            <span class="modal-spec-label">Entry / Ticket</span>
+            <span class="modal-spec-val mono" id="modalEntry"></span>
+          </div>
+          <div>
+            <span class="modal-spec-label">Golden Hour Tip</span>
+            <span class="modal-spec-val" id="modalGolden"></span>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem;">
+          <button type="button" class="btn btn-primary" id="modalSaveToggleBtn">Add to My Route</button>
+          <button type="button" class="btn btn-outline" id="modalDismissSecondary">Close Guide</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./app.js" defer></script>
+</body>
+</html>
